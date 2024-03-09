@@ -1,13 +1,13 @@
 import { ComponentProps, FC } from "react";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
-import { nodes } from "./nodes";
+import { nodes } from "@/nodes";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
-import { AutoFocusPlugin } from "./plugins/AutoFocusPlugin";
-import { ToolbarPlugin } from "./plugins/ToolbarPlugin";
-import { TreeViewPlugin } from "./plugins/TreeViewPlugin"; 
+import { AutoFocusPlugin } from "@/plugins/AutoFocusPlugin";
+import { ToolbarPlugin } from "@/plugins/ToolbarPlugin";
+import { TreeViewPlugin } from "@/plugins/TreeViewPlugin"; 
 
 import styles from './css/NanoBlockEditor.module.css'
 

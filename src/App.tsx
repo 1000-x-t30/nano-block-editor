@@ -1,4 +1,4 @@
-import { NanoBlockEditor } from './NanoBlockEditor'
+import { NanoBlockEditor } from '@/NanoBlockEditor'
 
 function App() {
   return (

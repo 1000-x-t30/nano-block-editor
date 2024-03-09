@@ -1,7 +1,7 @@
 import { FC, useCallback, useEffect, useState } from "react";
 import { TbH1, TbH2, TbH3 } from "react-icons/tb";
 import { HeadingTagType, $createHeadingNode } from "@lexical/rich-text";
-import styles from "../css/ToolbarPlugin.module.css";
+import styles from "@/css/ToolbarPlugin.module.css";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { $wrapNodes } from '@lexical/selection'
 import { $getSelection, $isRangeSelection } from "lexical";
