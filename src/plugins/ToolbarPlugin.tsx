@@ -1,4 +1,4 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { TbH1, TbH2, TbH3 } from "react-icons/tb";
 import { HeadingTagType, $createHeadingNode } from "@lexical/rich-text";
 import styles from "../css/ToolbarPlugin.module.css";
@@ -20,6 +20,11 @@ type BlockType = keyof typeof SupportedBlockType;
 export const ToolbarPlugin: FC = () => {
   const [blockType, setBlockType] = useState<BlockType>("paragraph");
   const [editor] = useLexicalComposerContext();
+
+  useEffect(() => {
+    setBlockType(blockType)
+  }, [blockType])
+  
 
   const formatHeading = useCallback(
     (type: HeadingTagType) => {
