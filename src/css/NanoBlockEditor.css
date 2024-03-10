@@ -1,14 +1,14 @@
-.editorContainer {
+.nbe-container {
   position: relative;
   padding: 24px;
   min-height: 240px;
 }
 
-.contentEditable {
+.nbe-editable {
   outline: none;
 }
 
-.placeholder {
+.nbe-placeholder {
   position: absolute;
   color: #888888;
   top: 24px;

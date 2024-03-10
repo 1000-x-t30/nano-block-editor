@@ -22,8 +22,6 @@ import { ToolbarPlugin } from "@/plugins/ToolbarPlugin";
 import { TreeViewPlugin } from "@/plugins/TreeViewPlugin";
 import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin";
 
-import styles from './css/NanoBlockEditor.module.css'
-
 interface Props {
   options: {
     namespace?: string
@@ -64,10 +62,10 @@ export const NanoBlockEditor: FC<Props> = (props: Props) => {
   return (
     <LexicalComposer initialConfig={initialConfig}>
       <ToolbarPlugin />
-      <div className={styles.editorContainer}>
+      <div className="nbe-container">
         <RichTextPlugin
-          contentEditable={<ContentEditable className={styles.contentEditable} />}
-          placeholder={<p className={styles.placeholder}>{placeholder}</p>}
+          contentEditable={<ContentEditable className="nbe-editable" />}
+          placeholder={<p className="nbe-placeholder">{placeholder}</p>}
           ErrorBoundary={LexicalErrorBoundary} />
       </div>
       <AutoFocusPlugin />

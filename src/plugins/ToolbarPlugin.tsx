@@ -1,6 +1,4 @@
 import { FC, useEffect, useState, createContext, useContext } from "react";
-
-import styles from "@/css/ToolbarPlugin.module.css";
 import { SupportedBlockType, BlockType } from "@/config/supportedBlockType";
 
 import { ParagraphNode } from "@/nodes/ParagraphNode";
@@ -27,7 +25,7 @@ export const ToolbarPlugin: FC = () => {
   }, [blockType])
 
   return (
-    <div className={styles.toolbar}>
+    <div className="nbe-toolbar">
       <BlockTypeContext.Provider value={{ blockType, setBlockType }}>
         <ParagraphNode supportedBlockType={SupportedBlockType.paragraph} />
         <Heading1Node supportedBlockType={SupportedBlockType.h1} />
