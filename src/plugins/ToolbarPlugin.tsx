@@ -1,75 +1,44 @@
-import { FC, useCallback, useEffect, useState } from "react";
-import { TbH1, TbH2, TbH3 } from "react-icons/tb";
-import { HeadingTagType, $createHeadingNode } from "@lexical/rich-text";
-import styles from "@/css/ToolbarPlugin.module.css";
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { $wrapNodes } from '@lexical/selection'
-import { $getSelection, $isRangeSelection } from "lexical";
+import { FC, useEffect, useState, createContext, useContext } from "react";
 
-const SupportedBlockType = {
-  paragraph: "Paragraph",
-  h1: "Heading 1",
-  h2: "Heading 2",
-  h3: "Heading 3",
-  h4: "Heading 4",
-  h5: "Heading 5",
-  h6: "Heading 6",
-} as const;
-type BlockType = keyof typeof SupportedBlockType;
+import styles from "@/css/ToolbarPlugin.module.css";
+import { SupportedBlockType, BlockType } from "@/config/supportedBlockType";
+
+import { ParagraphNode } from "@/nodes/ParagraphNode";
+import { Heading1Node } from "@/nodes/Heading1Node";
+import { Heading2Node } from "@/nodes/Heading2Node";
+import { Heading3Node } from "@/nodes/Heading3Node";
+import { BulletListNode } from "@/nodes/BulletListNode";
+import { NumberListNode } from "@/nodes/NumberListNode";
+import { CheckListNode } from "@/nodes/CheckListNode";
+import { QuoteNode } from "@/nodes/QuoteNode";
+import { CodeNode } from "@/nodes/CodeNode";
+
+export const BlockTypeContext = createContext({} as {
+  blockType: BlockType
+  setBlockType:React.Dispatch<React.SetStateAction<BlockType>>
+});
 
 export const ToolbarPlugin: FC = () => {
   const [blockType, setBlockType] = useState<BlockType>("paragraph");
-  const [editor] = useLexicalComposerContext();
 
   useEffect(() => {
     setBlockType(blockType)
+    useContext
   }, [blockType])
-  
-
-  const formatHeading = useCallback(
-    (type: HeadingTagType) => {
-      if (blockType !== type) {
-        editor.update(() => {
-          const selection = $getSelection();
-          if ($isRangeSelection(selection)) {
-            $wrapNodes(selection, () => $createHeadingNode(type));
-          }
-        });
-      }
-    },
-    [blockType, editor],
-  );
 
   return (
     <div className={styles.toolbar}>
-      <button
-        type="button"
-        role="checkbox"
-        title={SupportedBlockType["h1"]}
-        aria-label={SupportedBlockType["h1"]}
-        aria-checked={blockType === "h1"}
-        onClick={() => formatHeading("h1")}>
-        <TbH1 />
-      </button>
-      <button
-        type="button"
-        role="checkbox"
-        title={SupportedBlockType["h2"]}
-        aria-label={SupportedBlockType["h2"]}
-        aria-checked={blockType === "h2"}
-        onClick={() => formatHeading("h2")}>
-        <TbH2 />
-      </button>
-      <button
-        type="button"
-        role="checkbox"
-        title={SupportedBlockType["h3"]}
-        aria-label={SupportedBlockType["h3"]}
-        aria-checked={blockType === "h3"}
-        onClick={() => formatHeading("h3")}>
-        <TbH3 />
-      </button>
+      <BlockTypeContext.Provider value={{ blockType, setBlockType }}>
+        <ParagraphNode supportedBlockType={SupportedBlockType.paragraph} />
+        <Heading1Node supportedBlockType={SupportedBlockType.h1} />
+        <Heading2Node supportedBlockType={SupportedBlockType.h2} />
+        <Heading3Node supportedBlockType={SupportedBlockType.h3} />
+        <BulletListNode supportedBlockType={SupportedBlockType.ul} />
+        <NumberListNode supportedBlockType={SupportedBlockType.ol} />
+        <CheckListNode supportedBlockType={SupportedBlockType.check} />
+        <QuoteNode supportedBlockType={SupportedBlockType.quote} />
+        <CodeNode supportedBlockType={SupportedBlockType.code} />
+      </BlockTypeContext.Provider>
     </div>
   );
 };
-
