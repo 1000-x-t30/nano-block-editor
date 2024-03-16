@@ -29,6 +29,7 @@ interface Props {
     placeholder?: string
     theme?: {}
     treeView?: boolean
+    saveCallback?: (error: any, response: any) => void
   }
 }
 
@@ -40,12 +41,18 @@ export const NanoBlockEditor: FC<Props> = (props: Props) => {
   const placeholder = options.placeholder || ""
   const theme = Object.assign(initialTheme, options.theme)
   const treeView = options.treeView || false
+  const saveCallback = options.saveCallback || function() {}
 
   const [editorState, setEditorState] = useState<string>(data);
   function onChange(editorState: EditorState) {
     const editorStateJSON = editorState.toJSON();
     setEditorState(JSON.stringify(editorStateJSON));
   }
+
+  const nbeSaveButton = document.querySelector('[data-nbe-save]')
+  nbeSaveButton?.addEventListener('click', () => {
+    saveCallback(null, { json: editorState })
+  })
 
   function onError(error: any): void {
     console.error(error)
@@ -61,8 +68,8 @@ export const NanoBlockEditor: FC<Props> = (props: Props) => {
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
-      <ToolbarPlugin />
       <div className="nbe-container">
+        <div className="nbe-toolbar"><ToolbarPlugin /></div>
         <RichTextPlugin
           contentEditable={<ContentEditable className="nbe-editable" />}
           placeholder={<p className="nbe-placeholder">{placeholder}</p>}

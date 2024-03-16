@@ -7,7 +7,7 @@ import { Heading2Node } from "@/nodes/Heading2Node";
 import { Heading3Node } from "@/nodes/Heading3Node";
 import { BulletListNode } from "@/nodes/BulletListNode";
 import { NumberListNode } from "@/nodes/NumberListNode";
-import { CheckListNode } from "@/nodes/CheckListNode";
+// import { CheckListNode } from "@/nodes/CheckListNode";
 import { QuoteNode } from "@/nodes/QuoteNode";
 import { CodeNode } from "@/nodes/CodeNode";
 
@@ -25,18 +25,19 @@ export const ToolbarPlugin: FC = () => {
   }, [blockType])
 
   return (
-    <div className="nbe-toolbar">
+    
       <BlockTypeContext.Provider value={{ blockType, setBlockType }}>
-        <ParagraphNode supportedBlockType={SupportedBlockType.paragraph} />
-        <Heading1Node supportedBlockType={SupportedBlockType.h1} />
-        <Heading2Node supportedBlockType={SupportedBlockType.h2} />
-        <Heading3Node supportedBlockType={SupportedBlockType.h3} />
-        <BulletListNode supportedBlockType={SupportedBlockType.ul} />
-        <NumberListNode supportedBlockType={SupportedBlockType.ol} />
-        <CheckListNode supportedBlockType={SupportedBlockType.check} />
-        <QuoteNode supportedBlockType={SupportedBlockType.quote} />
-        <CodeNode supportedBlockType={SupportedBlockType.code} />
+        <ul className="nbe-toolbar-nodes">
+        <li className="nbe-toolbar-node"><ParagraphNode supportedBlockType={SupportedBlockType.paragraph} /></li>
+        <li className="nbe-toolbar-node"><Heading1Node supportedBlockType={SupportedBlockType.h1} /></li>
+        <li className="nbe-toolbar-node"><Heading2Node supportedBlockType={SupportedBlockType.h2} /></li>
+        <li className="nbe-toolbar-node"><Heading3Node supportedBlockType={SupportedBlockType.h3} /></li>
+        <li className="nbe-toolbar-node"><BulletListNode supportedBlockType={SupportedBlockType.ul} /></li>
+        <li className="nbe-toolbar-node"><NumberListNode supportedBlockType={SupportedBlockType.ol} /></li>
+        {/* <li className="nbe-toolbar-node"><CheckListNode supportedBlockType={SupportedBlockType.check} /></li> */}
+        <li className="nbe-toolbar-node"><QuoteNode supportedBlockType={SupportedBlockType.quote} /></li>
+        <li className="nbe-toolbar-node"><CodeNode supportedBlockType={SupportedBlockType.code} /></li>
+        </ul>
       </BlockTypeContext.Provider>
-    </div>
   );
 };
