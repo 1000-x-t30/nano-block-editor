@@ -1,31 +1,34 @@
 import { NanoBlockEditor } from '@/NanoBlockEditor'
+// import json from './initEditor.json'
 import json from './sampleData.json'
 
 function App() {
   const namespace = "testEditor"
-  const data = JSON.stringify(json)
+  const initEditor = JSON.stringify(json)
   const placeholder = "テストエディターに入力してください"
   const treeView = true
-  const saveCallback = (error: any, response: any) => {
+  const onSave = (error: any, response: any) => {
     if(error) {
       console.log(error)
+      return
     }
     console.log(JSON.parse(response.json))
   }
+  const editable = true
 
   const options = {
     namespace,
-    data,
+    initEditor,
     placeholder,
     treeView,
-    saveCallback
+    onSave,
+    editable
   }
 
   return (
     <div className="app">
       <NanoBlockEditor options={options} />
-
-      <button data-nbe-save="button">save</button>
+      <button data-nano-save="button">save</button>
     </div>
   );
 }

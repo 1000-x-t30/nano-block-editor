@@ -1,21 +1,16 @@
-import { FC } from 'react'
+// import { FC, ReactNode } from 'react'
 
-interface Props {
-  label: string
-  onClick: () => void
-}
+// interface Props {
+//   children: ReactNode
+// }
 
-export const SaveButton: FC<Props> = (props: Props) => {
-  const { label, onClick } = props
+// export const SaveButton: FC<Props> = (props: Props) => {
+//   const { children } = props
   
 
-  return (
-    <button
-      className="nbe-save-button"
-      type="button"
-      role="save"
-      onClick={onClick}>
-      {label}
-    </button>
-  )
-}
+//   return (
+//     <div className="nbe-save-button" role="save">
+//       {children}
+//     </div>
+//   )
+// }
