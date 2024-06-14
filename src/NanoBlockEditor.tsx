@@ -17,8 +17,10 @@ import { CheckListPlugin } from "@lexical/react/LexicalCheckListPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
+
 import { AutoFocusPlugin } from "@/plugins/AutoFocusPlugin";
 import { OnSavePlugin } from "@/plugins/OnSavePlugin";
+import { UpdateEditablePlugin } from "@/plugins/UpdateEditablePlugin";
 import { ToolbarPlugin } from "@/plugins/ToolbarPlugin";
 import { TreeViewPlugin } from "@/plugins/TreeViewPlugin";
 import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin";
@@ -26,12 +28,13 @@ import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPl
 interface Props {
   options: {
     namespace?: string
-    initEditor?: string
+    editorState?: string
     placeholder?: string
     theme?: {}
     treeView?: boolean
     onSave?: (error: any, response: any) => void
     editable?: boolean
+    updateEditable?: () => boolean
   }
 }
 
@@ -43,10 +46,10 @@ export const NanoBlockEditor: FC<Props> = (props: Props) => {
   const theme = Object.assign({}, initialTheme, options.theme)
   const treeView = options.treeView || false
   const onSave = options.onSave || undefined
-  const editable = options.editable || false
-  const editorState = options.initEditor || undefined
-  
-  const editorStateRef = useRef<EditorState>();
+  const editorState = options.editorState ? JSON.parse(options.editorState) : undefined
+  const editorStateRef = useRef<EditorState>()
+  const editable = options.editable ?? true;
+  const updateEditable = options.updateEditable || editable
 
   function onChange(editorState: EditorState) {
     editorStateRef.current = editorState
@@ -83,6 +86,7 @@ export const NanoBlockEditor: FC<Props> = (props: Props) => {
         <OnChangePlugin onChange={onChange} />
         {onSave && <OnSavePlugin onSave={onSave} />}
         <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
+        <UpdateEditablePlugin updateEditable={updateEditable} />
       </LexicalComposer>
     </>
   );
