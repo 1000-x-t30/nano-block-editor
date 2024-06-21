@@ -1,19 +1,20 @@
-import { NanoBlockEditor } from '@/NanoBlockEditor'
+import { NanoBlockEditor } from './NanoBlockEditor'
 import json from './sampleData.json'
 import { useState } from 'react'
 
 function App() {
-  const namespace = "testEditor"
+  const namespace = "NanoBlockEditor"
   const editorState = JSON.stringify(json)
   const placeholder = "テストエディターに入力してください"
   const treeView = true
-  const onSave = (error: any, response: any) => {
-    if(error) {
-      console.log(error)
-      return
-    }
-    console.log(JSON.parse(response.json))
+
+  // 
+  const [nanoState, setNanoState] = useState()
+  const onSave = () => {
+    console.log(nanoState)
   }
+
+  // editor mode
   const [editable, setEditable] = useState(true)
   const updateEditable = () => {
     return editable
@@ -28,7 +29,7 @@ function App() {
     placeholder,
     editorState,
     treeView,
-    onSave,
+    actionAfter: setNanoState,
     editable,
     updateEditable
   }
@@ -37,8 +38,8 @@ function App() {
     <div className="app">
       
       <NanoBlockEditor options={options} />
-      <button data-nano-save="button">save</button>
-      <button onClick={onChangeEditable}>編集</button>
+      <button type="button" onClick={onSave}>save</button>
+      <button onClick={onChangeEditable}>edit</button>
     </div>
   );
 }

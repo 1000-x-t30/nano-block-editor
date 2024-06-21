@@ -1,39 +1,39 @@
 :root {
-  --nbe-text-color: #16160e;
-  --nbe-button-text-color: #fff;
-  --nbe-button-bg-color: #595857;
-  --nbe-editor-color: #fafafa;
-  --nbe-placeholder-color: #888888;
-  --nbe-toolbar-bg-color: #fff;
+  --nano-text-color: #16160e;
+  --nano-button-text-color: #fff;
+  --nano-button-bg-color: #595857;
+  --nano-editor-color: #fafafa;
+  --nano-placeholder-color: #888888;
+  --nano-toolbar-bg-color: #fff;
 }
 
-div.nbe-container {
+div.nano-container {
   position: relative;
   padding: 1rem;
   min-height: 240px;
-  background-color: var(--nbe-editor-color);
-  color: var(--nbe-text-color);
+  background-color: var(--nano-editor-color);
+  color: var(--nano-text-color);
 }
-div.nbe-editable {
+div.nano-editable {
   outline: none;
 }
-p.nbe-placeholder {
+p.nano-placeholder {
   position: absolute;
-  color: var(--nbe-placeholder-color);
+  color: var(--nano-placeholder-color);
   top: 1.5rem;
   left: 1.5rem;
   pointer-events: none;
   user-select: none;
 }
 
-button.nbe-save-button {
+button.nano-save-button {
   display: inline-block;
   padding-right: .5rem;
   padding-left: .5rem;
   font-size: 1rem;
   line-height: 1.5;
-  color: var(--nbe-button-text-color);
-  background-color: var(--nbe-button-bg-color);
+  color: var(--nano-button-text-color);
+  background-color: var(--nano-button-bg-color);
   border: none;
   border-radius: 2px;
   cursor: pointer;
@@ -41,25 +41,25 @@ button.nbe-save-button {
   appearance: none;
 }
 
-div.nbe-toolbar {
+div.nano-toolbar {
   padding: .5rem;
-  background-color: var(--nbe-toolbar-bg-color);
+  background-color: var(--nano-toolbar-bg-color);
   box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, .2);
   border-radius: 2px;
 }
-ul.nbe-toolbar-nodes {
+ul.nano-toolbar-nodes {
   display: flex;
   align-items: center;
   gap: .5rem;
   margin: 0;
   padding: 0;
 }
-li.nbe-toolbar-node {
+li.nano-toolbar-node {
   list-style-type: none;
   width: 1.25rem;
   height: 1.25rem;
 }
-li.nbe-toolbar-node button {
+li.nano-toolbar-node button {
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -68,7 +68,7 @@ li.nbe-toolbar-node button {
   appearance: none;
   font-size: 1rem;
 }
-li.nbe-toolbar-node svg {
+li.nano-toolbar-node svg {
   width: 1rem;
   height: 1rem;
 }

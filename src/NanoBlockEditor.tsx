@@ -1,5 +1,4 @@
-import { ComponentProps, FC, useRef } from "react";
-import { type EditorState } from 'lexical';
+import { ComponentProps, FC } from "react";
 
 // Lexical
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
@@ -15,11 +14,10 @@ import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { CheckListPlugin } from "@lexical/react/LexicalCheckListPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
-import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 
 import { AutoFocusPlugin } from "@/plugins/AutoFocusPlugin";
-import { OnSavePlugin } from "@/plugins/OnSavePlugin";
+import { ActionAfterPlugin } from "@/plugins/ActionAfterPlugin";
 import { UpdateEditablePlugin } from "@/plugins/UpdateEditablePlugin";
 import { ToolbarPlugin } from "@/plugins/ToolbarPlugin";
 import { TreeViewPlugin } from "@/plugins/TreeViewPlugin";
@@ -32,7 +30,7 @@ interface Props {
     placeholder?: string
     theme?: {}
     treeView?: boolean
-    onSave?: (error: any, response: any) => void
+    actionAfter?: (editorState: any) => void
     editable?: boolean
     updateEditable?: () => boolean
   }
@@ -45,16 +43,11 @@ export const NanoBlockEditor: FC<Props> = (props: Props) => {
   const placeholder = options.placeholder || ""
   const theme = Object.assign({}, initialTheme, options.theme)
   const treeView = options.treeView || false
-  const onSave = options.onSave || undefined
-  const editorState = options.editorState ? JSON.parse(options.editorState) : undefined
-  const editorStateRef = useRef<EditorState>()
+  const actionAfter = options.actionAfter || undefined
+  const editorState = options.editorState ? options.editorState : undefined
   const editable = options.editable ?? true;
   const updateEditable = options.updateEditable || editable
-
-  function onChange(editorState: EditorState) {
-    editorStateRef.current = editorState
-  }
-
+  
   function onError(error: any): void {
     console.error(error)
   }
@@ -71,11 +64,11 @@ export const NanoBlockEditor: FC<Props> = (props: Props) => {
   return (
     <>
       <LexicalComposer initialConfig={initialConfig}>
-        <div className="nbe-container">
-          {editable && <div className="nbe-toolbar"><ToolbarPlugin /></div>}
+        <div className={`nano-container ${editable ? 'editable' : 'read-only'}`}>
+          {editable && <div className="nano-toolbar"><ToolbarPlugin /></div>}
           <RichTextPlugin
-            contentEditable={<ContentEditable className="nbe-editable" />}
-            placeholder={<p className="nbe-placeholder">{placeholder}</p>}
+            contentEditable={<ContentEditable className="nano-editable" />}
+            placeholder={<p className="nano-placeholder">{placeholder}</p>}
             ErrorBoundary={LexicalErrorBoundary} />
         </div>
         <AutoFocusPlugin />
@@ -83,8 +76,7 @@ export const NanoBlockEditor: FC<Props> = (props: Props) => {
         <CheckListPlugin />
         <HistoryPlugin />
         {treeView && <TreeViewPlugin />}
-        <OnChangePlugin onChange={onChange} />
-        {onSave && <OnSavePlugin onSave={onSave} />}
+        {actionAfter && <ActionAfterPlugin actionAfter={actionAfter} />}
         <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
         <UpdateEditablePlugin updateEditable={updateEditable} />
       </LexicalComposer>
