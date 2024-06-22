@@ -36,10 +36,10 @@ interface Props {
   }
 }
 
-export const NanoBlockEditor: FC<Props> = (props: Props) => {
+export const NanoLexEditor: FC<Props> = (props: Props) => {
   const { options } = props
 
-  const namespace = options.namespace || "NanoBlockEditor"
+  const namespace = options.namespace || "nl"
   const placeholder = options.placeholder || ""
   const theme = Object.assign({}, initialTheme, options.theme)
   const treeView = options.treeView || false
@@ -64,11 +64,11 @@ export const NanoBlockEditor: FC<Props> = (props: Props) => {
   return (
     <>
       <LexicalComposer initialConfig={initialConfig}>
-        <div className={`nano-container ${editable ? 'editable' : 'read-only'}`}>
-          {editable && <div className="nano-toolbar"><ToolbarPlugin /></div>}
+        <div className={`${namespace}-container ${editable ? 'editable' : 'read-only'}`}>
+          {editable && <div className={`${namespace}-toolbar`}><ToolbarPlugin /></div>}
           <RichTextPlugin
-            contentEditable={<ContentEditable className="nano-editable" />}
-            placeholder={<p className="nano-placeholder">{placeholder}</p>}
+            contentEditable={<ContentEditable className={`${namespace}-editable`} />}
+            placeholder={<p className={`${namespace}-placeholder`}>{placeholder}</p>}
             ErrorBoundary={LexicalErrorBoundary} />
         </div>
         <AutoFocusPlugin />

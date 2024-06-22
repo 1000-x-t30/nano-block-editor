@@ -27,16 +27,16 @@ export const ToolbarPlugin: FC = () => {
   return (
     
       <BlockTypeContext.Provider value={{ blockType, setBlockType }}>
-        <ul className="nano-toolbar-nodes">
-        <li className="nano-toolbar-node"><ParagraphNode supportedBlockType={SupportedBlockType.paragraph} /></li>
-        <li className="nano-toolbar-node"><Heading1Node supportedBlockType={SupportedBlockType.h1} /></li>
-        <li className="nano-toolbar-node"><Heading2Node supportedBlockType={SupportedBlockType.h2} /></li>
-        <li className="nano-toolbar-node"><Heading3Node supportedBlockType={SupportedBlockType.h3} /></li>
-        <li className="nano-toolbar-node"><BulletListNode supportedBlockType={SupportedBlockType.ul} /></li>
-        <li className="nano-toolbar-node"><NumberListNode supportedBlockType={SupportedBlockType.ol} /></li>
-        {/* <li className="nano-toolbar-node"><CheckListNode supportedBlockType={SupportedBlockType.check} /></li> */}
-        <li className="nano-toolbar-node"><QuoteNode supportedBlockType={SupportedBlockType.quote} /></li>
-        <li className="nano-toolbar-node"><CodeNode supportedBlockType={SupportedBlockType.code} /></li>
+        <ul className="nl-toolbar-nodes">
+        <li className="nl-toolbar-node"><ParagraphNode supportedBlockType={SupportedBlockType.paragraph} /></li>
+        <li className="nl-toolbar-node"><Heading1Node supportedBlockType={SupportedBlockType.h1} /></li>
+        <li className="nl-toolbar-node"><Heading2Node supportedBlockType={SupportedBlockType.h2} /></li>
+        <li className="nl-toolbar-node"><Heading3Node supportedBlockType={SupportedBlockType.h3} /></li>
+        <li className="nl-toolbar-node"><BulletListNode supportedBlockType={SupportedBlockType.ul} /></li>
+        <li className="nl-toolbar-node"><NumberListNode supportedBlockType={SupportedBlockType.ol} /></li>
+        {/* <li className="nl-toolbar-node"><CheckListNode supportedBlockType={SupportedBlockType.check} /></li> */}
+        <li className="nl-toolbar-node"><QuoteNode supportedBlockType={SupportedBlockType.quote} /></li>
+        <li className="nl-toolbar-node"><CodeNode supportedBlockType={SupportedBlockType.code} /></li>
         </ul>
       </BlockTypeContext.Provider>
   );

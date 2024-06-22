@@ -1,9 +1,9 @@
-import { NanoBlockEditor } from './NanoBlockEditor'
+import { NanoLexEditor } from './NanoLexEditor'
 import json from './sampleData.json'
 import { useState } from 'react'
 
 function App() {
-  const namespace = "NanoBlockEditor"
+  const namespace = "nl"
   const editorState = JSON.stringify(json)
   const placeholder = "テストエディターに入力してください"
   const treeView = true
@@ -37,7 +37,7 @@ function App() {
   return (
     <div className="app">
       
-      <NanoBlockEditor options={options} />
+      <NanoLexEditor options={options} />
       <button type="button" onClick={onSave}>save</button>
       <button onClick={onChangeEditable}>edit</button>
     </div>
