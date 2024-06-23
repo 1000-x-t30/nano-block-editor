@@ -1,5 +1,5 @@
 import { FC, useCallback, useContext } from 'react'
-import { ImParagraphCenter } from "react-icons/im";
+import { PiParagraphBold } from "react-icons/pi";
 import { CheckButton } from '@/components/CheckButton'
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $wrapNodes } from '@lexical/selection'
@@ -33,7 +33,7 @@ export const ParagraphNode: FC<Props> = (props: Props) => {
     ariaLabel={supportedBlockType}
     ariaChecked={blockType === "paragraph"}
     onClick={() => formatParagraph()}>
-      <ImParagraphCenter />
+      <PiParagraphBold />
     </CheckButton>
   )
 }

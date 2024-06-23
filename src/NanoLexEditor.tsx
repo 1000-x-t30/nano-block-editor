@@ -65,7 +65,7 @@ export const NanoLexEditor: FC<Props> = (props: Props) => {
     <>
       <LexicalComposer initialConfig={initialConfig}>
         <div className={`${namespace}-container ${editable ? 'editable' : 'read-only'}`}>
-          {editable && <div className={`${namespace}-toolbar`}><ToolbarPlugin /></div>}
+          {editable && <ToolbarPlugin />}
           <RichTextPlugin
             contentEditable={<ContentEditable className={`${namespace}-editable`} />}
             placeholder={<p className={`${namespace}-placeholder`}>{placeholder}</p>}
