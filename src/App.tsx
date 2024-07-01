@@ -1,4 +1,4 @@
-import { NanoLexEditor } from './NanoLexEditor'
+import { NanoLexEditor, HeadingNode } from './container/NanoLexEditor'
 import json from './sampleData.json'
 import { useState } from 'react'
 
@@ -8,7 +8,6 @@ function App() {
   const placeholder = "テストエディターに入力してください"
   const treeView = true
 
-  // 
   const [nanoState, setNanoState] = useState()
   const onSave = () => {
     console.log(nanoState)
@@ -29,6 +28,11 @@ function App() {
     placeholder,
     editorState,
     treeView,
+    nodes: [HeadingNode],
+    maxNodes: {
+      max: 1,
+      callback: (isOver: boolean) => console.log(isOver ? 'max over!' : 'safe!')
+    },
     actionAfter: setNanoState,
     editable,
     updateEditable

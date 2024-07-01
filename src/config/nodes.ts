@@ -6,7 +6,7 @@ import { HorizontalRuleNode } from '@lexical/react/LexicalHorizontalRuleNode';
 import { LinkNode } from '@lexical/link';
 
 
-export const nodes: Klass<LexicalNode>[] = [
+export const initialNodes: Klass<LexicalNode>[] = [
   HeadingNode,
   ListNode,
   ListItemNode,
